@@ -44,9 +44,51 @@ function StudentView() {
 
 }
 
-const student1 = new Student("1234", "Tim");
+function StudentController(model, view){
+    //private members
+    let model = model;
+    let view = view;
+
+    //public properties
+    Object.defineProperty(this, "rollNumber", {
+      get: function() {
+        return model.rollNumber;
+      },
+      set: function(value) {
+        model.rollNumber = value;
+      }
+    });
+
+    Object.defineProperty(this, "name", {
+      get: function() {
+        return model.name;
+      }
+      ,
+      set: function(value) {
+        if (!value)
+         throw new Error("Invalid Name.");
+
+        model.name = value;
+      }
+    });
+
+    //public methods
+    this.updateView = function() {
+        view.printStudentDetails(model.name, model.rollNumber);
+    }
+
+
+}
+
+const model = new Student("6789", "Carl Maynard");
 const view = new StudentView();
-view.printStudentDetails(student1.name, student1.rollNumber);
+const controller = new StudentController(model, view);
+controller.updateView();
+controller.name = "Jesus Vasquez";
+controller.updateView();
+
+
+//view.printStudentDetails(student1.name, student1.rollNumber);
 
 //console.log(student1);
 //console.log(student1.getRollNumber());
