@@ -32,22 +32,28 @@ function Student(rollNumber, studentName){
         name = value;
       }
     });
+}
 
+function StudentView() {
+  
+  this.printStudentDetails = function(studentName, studentRollNumber) {
+    console.log('Student: ');
+    console.log(`Name: ${studentName}`);
+    console.log(`Roll Number: ${studentRollNumber}`);
+  };
 
 }
 
 const student1 = new Student("1234", "Tim");
+const view = new StudentView();
+view.printStudentDetails(student1.name, student1.rollNumber);
 
 //console.log(student1);
-
 //console.log(student1.getRollNumber());
 //console.log(student1.getStudentName());
-console.log(student1.rollNumber, student1.name);
-
-student1.name = "Russell";
-console.log(student1.rollNumber, student1.name);
-
-
+//console.log(student1.rollNumber, student1.name);
+//student1.name = "Russell";
+//console.log(student1.rollNumber, student1.name);
 //console.log(student1.name);
 //console.log(student1.rollNumber);
 
