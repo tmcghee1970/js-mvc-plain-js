@@ -6,31 +6,48 @@ const appDiv = document.getElementById('app');
 appDiv.innerHTML = `<h1>JS Starter</h1>`;
 
 function Student(rollNumber, studentName){
-    var rollNumber = rollNumber;
-    var name = studentName;
+    //private members
+    let rollNumber = rollNumber;
+    let name = studentName;
 
-    return {
-      getRollNumber: function() {
+    //public properties
+    Object.defineProperty(this, "rollNumber", {
+      get: function() {
         return rollNumber;
       },
-      getStudentName: function() {
+      set: function(value) {
+        rollNumber = value;
+      }
+    });
+
+    Object.defineProperty(this, "name", {
+      get: function() {
         return name;
       }
-    };
-    //this.getRollNumber = function() {
-    //    return this.rollNumber;
-    //}
-    //this.getStudentName = function() {
-    //    return this.name;
-    //}
+      ,
+      set: function(value) {
+        if (!value)
+         throw new Error("Invalid Name.");
+
+        name = value;
+      }
+    });
+
+
 }
 
 const student1 = new Student("1234", "Tim");
 
-console.log(student1);
-console.log(student1.getRollNumber());
-console.log(student1.getStudentName());
+//console.log(student1);
 
-console.log(student1.name);
-console.log(student1.rollNumber);
+//console.log(student1.getRollNumber());
+//console.log(student1.getStudentName());
+console.log(student1.rollNumber, student1.name);
+
+student1.name = "Russell";
+console.log(student1.rollNumber, student1.name);
+
+
+//console.log(student1.name);
+//console.log(student1.rollNumber);
 
